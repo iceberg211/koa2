@@ -12,7 +12,6 @@ const sleep = time => new Promise(resolve => {
       dumpio: false
     });
     const page = await browser.newPage();
-    console.log('开始访问视频页面')
 
     await page.goto(url, {
       waitUntil: 'networkidle2'

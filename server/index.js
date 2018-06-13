@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const pug = require('pug')
 const { resolve } = require('path')
 const { connect, initSchemas } = require('./dataBase/init')
-
+  // const router = require('./routes')
 
   ; (async () => {
     await connect()
@@ -14,6 +14,10 @@ const { connect, initSchemas } = require('./dataBase/init')
   })();
 
 const app = new Koa();
+// app
+//   .use(router.routes())
+//   .use(router.allowedMethods())
+
 // 视图中间件
 app.use(views(resolve(__dirname, './views'), {
   extension: 'pug'

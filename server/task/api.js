@@ -1,22 +1,20 @@
-// 用于发起服务端对于api的请求
+// 用于发起服务端对服务器api的请求
+// request的封装
 const rp = require('request-promise-native')
 
 async function fetchMovie(item) {
     const url = `http://api.douban.com/v2/movie/${item.doubanId}`
     let res = await rp(url)
-
     try {
         res = JSON.parse(res)
     } catch (err) {
         res = null
     }
-
     return res
 }
 
 
-;
-(async () => {
+; (async () => {
     let movies = [{
         doubanId: '25719258',
         title: '战神',
@@ -26,8 +24,7 @@ async function fetchMovie(item) {
         doubanId: '3878007',
         title: '海王 潜水侠 水行侠',
         poster: 'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2370038514.webp'
-    }
-    ]
+    }]
     movies.map(async movie => {
         let movieData = await fetchMovie(movie)
         try {
@@ -39,4 +36,4 @@ async function fetchMovie(item) {
         console.log(movieData)
     })
 
-})()
+})() 
