@@ -4,7 +4,7 @@ const { resolve } = require('path')
 
   ; (async () => {
     // 拿到脚本
-    const script = resolve(__dirname, '../crawler/trailer-list.js')
+    const script = resolve(__dirname, '../crawler/trailer.js')
     // 注册一个子进程
     const child = cp.fork(script, [])
 
@@ -27,7 +27,6 @@ const { resolve } = require('path')
     })
     // 消息获取，当拿到data后
     child.on('message', data => {
-      let result = data.result
-      console.log('子进程任务', result)
+      console.log('子进程任务', data)
     })
   })()

@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
-const url = `https://movie.douban.com/subject/4920389`
+const url = `https://movie.douban.com/subject/`
+const doubanId = 4920389
 const videoUrl = 'https://movie.douban.com/trailer/229187/#content'
 
 const sleep = time => new Promise(resolve => {
@@ -13,7 +14,7 @@ const sleep = time => new Promise(resolve => {
     });
     const page = await browser.newPage();
 
-    await page.goto(url, {
+    await page.goto(url + doubanId, {
       waitUntil: 'networkidle2'
     });
 
@@ -25,7 +26,7 @@ const sleep = time => new Promise(resolve => {
 
       if (it && it.length > 0) {
         var link = it.attr('href')
-        var cover = it.find('img').attr('src')
+        var cover = it.css("background-image").split("\"")[1].slice(0, -1)
 
         return {
           link,
@@ -36,7 +37,7 @@ const sleep = time => new Promise(resolve => {
       return {}
     })
     let video
-
+    // 详情页面说明有预告片地址
     if (result.link) {
       await page.goto(result.link, {
         waitUntil: 'networkidle2'
@@ -57,11 +58,11 @@ const sleep = time => new Promise(resolve => {
 
     const data = {
       video,
+      doubanId,
+      cover: result.cover
     }
 
     process.send(data)
     await browser.close();
-    process.send({ result })
-
   })();
 

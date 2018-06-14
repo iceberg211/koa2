@@ -10,7 +10,7 @@ const { connect, initSchemas } = require('./dataBase/init')
     await connect()
     const Movie = mongoose.model('Movie')
     const movie = await Movie.find({})
-    console.log('数据初始化', movie)
+    console.log('数据初始化')
   })();
 
 const app = new Koa();
