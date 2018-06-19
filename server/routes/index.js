@@ -1,6 +1,5 @@
 const Router = require('koa-router')
 const mongoose = require('mongoose')
-
 const router = new Router();
 
 // 路由可以添加中间件，类似于路由钩子,传入多中间件数组
@@ -8,9 +7,6 @@ const router = new Router();
 @controller('/api/v0/movies')
 export class moiveController {
   @get('/')
-  @login()
-  @admin(['developer'])
-  @log
   async getMovies(ctx, next) {
     const Movie = mongoose.model('Movie')
     const movies = await Movie.find({}).sort({
@@ -20,8 +16,6 @@ export class moiveController {
       movies
     }
   }
-  @post
-  @required({ body: ['username', 'doubanId'] })
   @get('/:id')
   async getMoviesDetail(ctx, next) {
     const Movie = mongoose.model('Movie')

@@ -3,7 +3,10 @@ const Schema = mongoose.Schema
 const { Mixed, ObjectId } = Schema.Types
 
 const MovieSchema = new mongoose.Schema({
-  doubanId: String,
+  doubanId: {
+    unique: true,
+    type: String,
+  },
   rate: Number,
   title: String,
   summary: String,
@@ -14,10 +17,10 @@ const MovieSchema = new mongoose.Schema({
   coverKey: String,
   posterKey: String,
   rawTitle: String,
-  category: {
+  category: [{
     type: ObjectId,
     ref: 'Category'
-  },
+  }],
   movieTypes: [String],
   pubdate: Mixed,
   tags: Mixed,
