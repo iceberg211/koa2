@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Promise = require('bluebird')
 
-// 通过回掉函数
+// 通过回调函数
 function readFile(cb) {
   fs.readFile('./package.json', (err, data) => {
     if (err) return cb(err)

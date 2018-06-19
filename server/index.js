@@ -4,13 +4,12 @@ const mongoose = require('mongoose')
 const pug = require('pug')
 const { resolve } = require('path')
 const { connect, initSchemas } = require('./dataBase/init')
-  // const router = require('./routes')
+
 
   ; (async () => {
     await connect()
-    const Movie = mongoose.model('Movie')
-    const movie = await Movie.find({})
-    console.log('数据初始化')
+    initSchemas()
+    require('./task/trailer')
   })();
 
 const app = new Koa();

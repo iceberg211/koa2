@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const { ObjectId, Mixed } = Schema.Types.Mixed;
+const { ObjectId, Mixed } = Schema.Types;
 
 // 定义数据库单条数据模型
-const movieSchema = new Schema({
+const CategorySchema = new Schema({
   name: {
     unique: true,
     type: String,
@@ -16,15 +16,14 @@ const movieSchema = new Schema({
     createdAt: {
       type: Date,
       default: Date.now()
-    },
-    updatedAt: {
+    }, updatedAt: {
       type: Date,
       default: Date.now()
     }
   }
 })
 // 增加保存钩子
-movieSchema.pre('save', next => {
+CategorySchema.pre('save', function (next) {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
@@ -32,4 +31,4 @@ movieSchema.pre('save', next => {
   }
   next()
 })
-mongoose.model('Movie', movieSchema);
+mongoose.model('Category', CategorySchema);

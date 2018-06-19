@@ -1,6 +1,9 @@
 // 子进程
 const cp = require('child_process')
 const { resolve } = require('path')
+const mongoose = require('mongoose')
+const Movie = mongoose.model('Movie')
+
 
   ; (async () => {
     // 拿到脚本
@@ -27,6 +30,17 @@ const { resolve } = require('path')
     })
     // 消息获取，当拿到data后
     child.on('message', data => {
-      console.log('子进程任务', data)
+      console.log(data)
+      let result = data.result;
+      // result.forEach(async item => {
+      //   // 当前数据是否存储过
+      //   let movie = await Movie.findOne({
+      //     doubanId: item.doubanId
+      //   })
+      //   if (!movie) {
+      //     movie = new Movie(item)
+      //     await movie.save();
+      //   }
+      // });
     })
   })()

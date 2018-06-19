@@ -36,10 +36,12 @@ const sleep = time => new Promise(resolve => {
           let doubanId = it.find('.nbg').attr('href').split('subject/')[1].split('/')[0]
           let title = $(it.find('.pl2 a')[0]).text().replace(/\n/g, '').replace(/\r/g, '').replace(/\//g, '').trim()
           let poster = it.find('img').attr('src').replace('s_ratio', 'l_ratio')
+          let rate = Number(it.find('.rate').text())
 
           links.push({
             doubanId,
             title,
+            rate,
             poster
           })
         })
