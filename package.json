@@ -4,7 +4,9 @@
   "description": "koa2 node.js",
   "main": "async.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "client": "parcel src/index.html",
+    "build": "parcel build src/index.html --no-cache -d dist --public-url /"
   },
   "keywords": [
     "koa2"
@@ -35,7 +37,7 @@
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.6",
+    "autoprefixer": "^7.2.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
@@ -47,8 +49,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "cssnext": "^1.8.4",
     "husky": "^0.14.3",
+    "node-sass": "^4.9.0",
     "nodemon": "^1.12.1",
+    "parcel-bundler": "^1.9.2",
     "puppeteer": "^1.4.0"
   }
 }
