@@ -2,29 +2,33 @@ const Koa = require('koa');
 const views = require('koa-views');
 const mongoose = require('mongoose')
 const pug = require('pug')
-const { resolve } = require('path')
+const R = require('ramda')
+const { join } = require('path')
 const { connect, initSchemas } = require('./dataBase/init')
-const router = require('./routes')
+
+
+const Middlewares = ['router']
+
+const useMiddlewares = (app) => {
+  R.map(
+    R.compose(
+      R.forEachObjIndexed(
+        e => e(app)
+      ),
+      require,
+      name => join(__dirname, `./middlewares/${name}`)
+    )
+  )(Middlewares)
+}
 
   ; (async () => {
     await connect()
     initSchemas()
+    const app = new Koa()
+    await useMiddlewares(app)
+    app.listen(3000)
+    console.log('监听在3000')
   })();
 
-const app = new Koa();
-app.use(router.routes())
-  .use(router.allowedMethods())
 
-// 视图中间件
-app.use(views(resolve(__dirname, './views'), {
-  extension: 'pug'
-}))
 
-app.use(async (ctx, next) => {
-  await ctx.render('index', {
-    name: 'hewei'
-  })
-  console.log('listen at 3000')
-});
-
-app.listen(3000)

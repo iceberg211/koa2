@@ -8,7 +8,7 @@ const LOCK_TIME = 2 * 60 * 60 * 1000
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-
+  // user admin superAdmin
   role: {
     type: String,
     default: 'user'
