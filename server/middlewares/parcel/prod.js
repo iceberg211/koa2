@@ -1,15 +1,14 @@
-const views = require('koa-views')
-const serve = require('koa-static')
-const { resolve } = require('path')
-
+import views from 'koa-views'
+import serve from 'koa-static'
+import { resolve } from 'path'
 const r = path => resolve(__dirname, path)
 
-export const dev = async app => {
-  await bundler.bundle()
+export const prod = app => {
   app.use(serve(r('../../../dist')))
-  app.use(views(r('../../../dist')), {
+  app.use(views(r('../../../dist'), {
     extension: 'html'
-  })
+  }))
+
   app.use(async (ctx) => {
     await ctx.render('index.html')
   })
