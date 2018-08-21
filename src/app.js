@@ -9,7 +9,13 @@ import Routes from './routes'
 // import './assets/common.sass'
 
 export default () => (
-  <div>
-    测试
-  </div>
+  <Switch>
+    {
+      Routes.map(({ name, path, exact = true, component }) => (
+        <Route path={path} exact={exact} component={component} key={name} />
+      ))
+    }
+  </Switch>
 )
+
+
